@@ -13,7 +13,7 @@ namespace TesteTransacao
             Initial Catalog = xxxxxx;
             User Id = xxxxxx;
             Password = xxxxxx;";
-        //@"Data Source = SERVER,PORT; 
+        //Data Source = SERVER,PORT; 
         //Initial Catalog = BD;
         //User Id = USER; 
         //Password=PASS;";
