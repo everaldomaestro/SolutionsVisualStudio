@@ -9,10 +9,10 @@ namespace TesteTransacao
     {
         //String de conexão com o banco
         private string StringCon =
-            @"Data Source = xxxxxx,xxxxxx; 
-            Initial Catalog = xxxxxx;
-            User Id = xxxxxx;
-            Password = xxxxxx;";
+            @"Data Source = TI,1433;
+            Initial Catalog = TesteTransacao;
+            User Id = sa;
+            Password = abc.123;";
         //Data Source = SERVER,PORT; 
         //Initial Catalog = BD;
         //User Id = USER; 
@@ -38,10 +38,8 @@ namespace TesteTransacao
                     foreach (string cmdTxt in cmds)
                     {
                         cmd.CommandText = cmdTxt;
-                        Console.WriteLine(cmd.CommandText);
                         cmd.Transaction = tran;
-                        cmd.ExecuteNonQuery();
-                        Console.WriteLine("Comando executado com sucesso!");
+                        cmd.ExecuteNonQuery();      
                     }
                     tran.Commit();
                 }
