@@ -20,15 +20,13 @@ namespace TesteTransacao
 
         private static SqlConnection con;
         private static SqlTransaction tran;
-
-
-        //private SqlCommand cmd2 = con.CreateCommand();
+        private static SqlCommand cmd;
 
         public void transacao(string[] cmds)
         {
             using (con = new SqlConnection())
             {
-                SqlCommand cmd = con.CreateCommand();
+                cmd = con.CreateCommand();
                 con.ConnectionString = StringCon;
                 con.Open();
                 tran = con.BeginTransaction();
@@ -54,7 +52,5 @@ namespace TesteTransacao
                 }
             }
         }
-
-
     }
 }

@@ -14,8 +14,6 @@ namespace TesteTransacao
                 cmds[1] = "insert into Teste (Nome, Idade) values (19,NULL)";
 
                 tr.transacao(cmds);
-
-                Console.ReadLine();
             }
         }
     }
