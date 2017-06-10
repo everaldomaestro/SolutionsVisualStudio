@@ -7,12 +7,8 @@ namespace TesteTransacao
 {
     class Transaction
     {
-        //String de conexão com o banco
-        private string StringCon =
-            @"Data Source = TI,1433;
-            Initial Catalog = TesteTransacao;
-            User Id = sa;
-            Password = abc.123;";
+        //String de conexão com o banco        
+        private string StringCon = @"Data Source = x,x; Initial Catalog = x; User Id = x; Password = x;";
         //Data Source = SERVER,PORT; 
         //Initial Catalog = BD;
         //User Id = USER; 
