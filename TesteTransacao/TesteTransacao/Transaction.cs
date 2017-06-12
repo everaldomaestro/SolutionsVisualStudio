@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data.SqlClient;
 
 namespace TesteTransacao
 {
     class Transaction
     {
-        //String de conexão com o banco        
-        private string StringCon = @"Data Source = x,x; Initial Catalog = x; User Id = x; Password = x;";
         //Data Source = SERVER,PORT; 
         //Initial Catalog = BD;
         //User Id = USER; 
         //Password=PASS;";
-
+        //String de conexão com o banco
+        private string StringCon = @"Data Source = x,x; Initial Catalog = x; User Id = x; Password = x;";
         private static SqlConnection con;
         private static SqlTransaction tran;
         private static SqlCommand cmd;
 
-        public void transacao(string[] cmds)
+        public void Transacao(string[] cmds)
         {
             using (con = new SqlConnection())
             {
