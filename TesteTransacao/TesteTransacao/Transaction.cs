@@ -55,31 +55,31 @@ namespace TesteTransacao
 
         public void TransacaoMySQL(string[] cmds)
         {
-            using (SQLCon = new SqlConnection())
+            using (MySQLCon = new MySqlConnection())
             {
-                SQLCon.ConnectionString = SQLStringCon;
-                SQLCon.Open();
-                SQLTran = SQLCon.BeginTransaction();
+                MySQLCon.ConnectionString = MySQLStringCon;
+                MySQLCon.Open();
+                MySQLTran = MySQLCon.BeginTransaction();
 
                 try
                 {
                     foreach (string cmdTxt in cmds)
                     {
-                        SQLCmd = SQLCon.CreateCommand();
-                        SQLCmd.CommandText = cmdTxt;
-                        SQLCmd.Transaction = SQLTran;
-                        SQLCmd.ExecuteNonQuery();
+                        MySQLCmd = MySQLCon.CreateCommand();
+                        MySQLCmd.CommandText = cmdTxt;
+                        MySQLCmd.Transaction = MySQLTran;
+                        MySQLCmd.ExecuteNonQuery();
                     }
                     SQLTran.Commit();
                 }
-                catch (SqlException ex)
+                catch (MySqlException ex)
                 {
-                    SQLTran.Rollback();
+                    MySQLTran.Rollback();
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    SQLCon.Close();
+                    MySQLCon.Close();
                 }
             }
         }
