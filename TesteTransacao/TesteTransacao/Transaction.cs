@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace TesteTransacao
 {
@@ -10,38 +12,38 @@ namespace TesteTransacao
         //User Id = USER; 
         //Password=PASS;";
         //String de conexão com o banco
-        private string StringCon = @"Data Source = x,x; Initial Catalog = x; User Id = x; Password = x;";
-        private static SqlConnection con;
-        private static SqlTransaction tran;
-        private static SqlCommand cmd;
+        private string SQLStringCon = @"Data Source = x,x; Initial Catalog = x; User Id = x; Password = x;";
+        private static SqlConnection SQLCon;
+        private static SqlTransaction SQLTran;
+        private static SqlCommand SQLCmd;
 
         public void Transacao(string[] cmds)
         {
-            using (con = new SqlConnection())
+            using (SQLCon = new SqlConnection())
             {
-                cmd = con.CreateCommand();
-                con.ConnectionString = StringCon;
-                con.Open();
-                tran = con.BeginTransaction();
+                SQLCon.ConnectionString = SQLStringCon;
+                SQLCon.Open();
+                SQLTran = SQLCon.BeginTransaction();
 
                 try
                 {
                     foreach (string cmdTxt in cmds)
                     {
-                        cmd.CommandText = cmdTxt;
-                        cmd.Transaction = tran;
-                        cmd.ExecuteNonQuery();      
+                        SQLCmd = SQLCon.CreateCommand();
+                        SQLCmd.CommandText = cmdTxt;
+                        SQLCmd.Transaction = SQLTran;
+                        SQLCmd.ExecuteNonQuery();      
                     }
-                    tran.Commit();
+                    SQLTran.Commit();
                 }
                 catch (SqlException ex)
                 {
-                    tran.Rollback();
+                    SQLTran.Rollback();
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    con.Close();
+                    SQLCon.Close();
                 }
             }
         }
