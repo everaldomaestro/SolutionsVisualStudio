@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace TesteTransacao
@@ -53,35 +52,5 @@ namespace TesteTransacao
             }
         }
 
-        public void TransacaoMySQL(string[] cmds)
-        {
-            using (MySQLCon = new MySqlConnection())
-            {
-                MySQLCon.ConnectionString = MySQLStringCon;
-                MySQLCon.Open();
-                MySQLTran = MySQLCon.BeginTransaction();
-
-                try
-                {
-                    foreach (string cmdTxt in cmds)
-                    {
-                        MySQLCmd = MySQLCon.CreateCommand();
-                        MySQLCmd.CommandText = cmdTxt;
-                        MySQLCmd.Transaction = MySQLTran;
-                        MySQLCmd.ExecuteNonQuery();
-                    }
-                    SQLTran.Commit();
-                }
-                catch (MySqlException ex)
-                {
-                    MySQLTran.Rollback();
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    MySQLCon.Close();
-                }
-            }
-        }
     }
 }
